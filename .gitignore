@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace test
+{
+
+    class Program
+    {
+      public static void max_unique_substring(char[]str)
+        {
+            int maxlen = 0;
+            int begin = 0;
+            int n = str.Length;
+            for (int i = 0; i < n; i++)
+                for (int j = 1; j < n; j++)
+                {
+                    int flag = 0;
+                    for (int m = i; m <= j; m++)
+                    {
+                        for (int s = m + 1; s < j; s++)
+                        {
+                            if (str[s] == str[m])
+                            {
+                                flag = 1;
+                                break;
+                            }
+                        }
+                        if (flag == 1) break;
+                    }
+                    if (flag == 0 && j - i + 1 > maxlen)
+                    {
+                        maxlen = j - i;
+                        begin = i;
+                    }
+                }
+            string print=null;
+            for (int i = begin; i < begin+maxlen; i++)
+            {
+                print += str[i];
+            }
+            
+            Console.WriteLine("子字串为："+print+"长度为："+maxlen);
+
+        }
+        
+        static void Main(string[] args)
+        {
+            while (true)
+            {
+                string str = Console.ReadLine();
+                char[]charArray=str.ToCharArray();
+                max_unique_substring(charArray);
+            }
+        }
+
+
+   
+       
+    }
+}
